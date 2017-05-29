@@ -47,7 +47,7 @@ function metal_carpentry.register_ubeam(subname, recipeitem, groups, images, des
 		}
 	})
 
--- Recette symétrique pour escaliers qui descendent :-)))
+-- Recette symétrique
 	minetest.register_craft({
 		output = "metal_carpentry:ubeam_" .. subname .. " 10",
 		recipe = {
@@ -58,35 +58,45 @@ function metal_carpentry.register_ubeam(subname, recipeitem, groups, images, des
 	})
 end
 
-minetest.register_node('metal_carpentry:ubeam_steel', {
-	description = 'Steel U beam',
-	drawtype = 'mesh',
-	mesh = 'metal_carpentry_ubeam.obj',
-	tiles = {'default_steel_block.png'},
-	groups = {cracky=1, level=2},
-	is_ground_content = false,
-	sounds = default.node_sound_metal_defaults(),
-	paramtype = 'light',
-	paramtype2 = 'facedir',
-	selection_box = {
-		type = 'fixed',
-		fixed = {
-			--right, bottom, back, left, top, front (origine au centre du node)
-			{0.25, 0.4, 0.5, -0.25, 0.5, -0.5},
-			{0.25, -0.5, 0.5, -0.25, -0.4, -0.5},
-			{0.25, -0.5, 0.5, 0.15, 0.5, -0.5},
+function metal_carpentry.register_hbeam (param_table)
+	minetest.register_node ("metal_carpentry:hbeam_" .. param_table.subname, {
+		description = param_table.description,
+		drawtype = "mesh",
+		mesh = "metal_carpentry_hbeam.obj",
+		tiles = param_table.tiles,
+		groups = param_table.groups,
+		is_ground_content = false,
+		sounds = param_table.sounds,
+		paramtype = "light",
+		paramtype2 = "facedir",
+		selection_box = {
+			type = "fixed",
+			fixed = {
+				{.45, .4, .5, -.45, .5, -.5},
+				{.45, -.5, .5, -.45, -.4, -.5},
+				{.05, -.5, .5, -.05, .5, -.5}
+			}
 		},
-	},
-	collision_box = {
-		type = 'fixed',
-		fixed = {
-			--right, bottom, back, left, top, front (origine au centre du node)
-			{0.25, 0.4, 0.5, -0.25, 0.5, -0.5},
-			{0.25, -0.5, 0.5, -0.25, -0.4, -0.5},
-			{0.25, -0.5, 0.5, 0.15, 0.5, -0.5},
+		collision_box = {
+			type = "fixed",
+			fixed = {
+				{.45, .4, .5, -.45, .5, -.5},
+				{.45, -.5, .5, -.45, -.4, -.5},
+				{.05, -.5, .5, -.05, .5, -.5}
+			}
 		},
-	},
-})
+	}) -- fin d'appel register_node
+
+	minetest.register_craft({
+		output = 'metal_carpentry:hbeam_' .. param_table.subname .. ' 10',
+		recipe = {
+			{param_table.recipeitem, param_table.recipeitem, param_table.recipeitem},
+			{"", param_table.recipeitem, ""},
+			{param_table.recipeitem, param_table.recipeitem, param_table.recipeitem}
+		}
+	}) -- fin d'appel register_craft
+end
+
 
 --
 -- Définition des nodes
@@ -159,6 +169,15 @@ metal_carpentry.register_ubeam (
 	"Steel ubeam",
 	default.node_sound_metal_defaults()
 )
+
+metal_carpentry.register_hbeam({
+	subname = "steel",
+	description = "Steel H beam",
+	tiles = {"default_steel_block.png"},
+	recipeitem = "default:steelblock",
+	groups = {cracky=1, level=2},
+	sounds = default.node_sound_metal_defaults()
+})
 
 --
 -- Définition des craft
