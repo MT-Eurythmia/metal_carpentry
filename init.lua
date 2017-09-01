@@ -224,7 +224,7 @@ minetest.register_node('metal_carpentry:brushed_steel_block', {
 -- function stairs.register_stair_and_slab(subname, recipeitem,
 -- groups, images, desc_stair, desc_slab, sounds)
 stairs.register_stair_and_slab(
-	"rusty_iron",
+	"corrugated_iron",
 	"metal_carpentry:corrugated_iron_block",
 	{cracky = 1, level = 2, corrugated=1},
 	{"metal_carpentry_corrugated_iron.png"},
@@ -234,7 +234,7 @@ stairs.register_stair_and_slab(
 )
 
 stairs.register_stair_and_slab(
-	"old_bronze",
+	"corrugated_bronze",
 	"metal_carpentry:corrugated_bronze_block",
 	{cracky = 1, level = 2, corrugated=1},
 	{"metal_carpentry_corrugated_bronze.png"},
@@ -250,7 +250,7 @@ stairs.register_stair_and_slab(
 --
 
 metal_carpentry.register_all_shapes({
-	subname = "old_bronze",
+	subname = "corrugated_bronze",
 	tiles = {"metal_carpentry_corrugated_bronze.png"},
 	recipeitem = "metal_carpentry:corrugated_bronze_block",
 	groups = {cracky=1, level=2, corrugated=1},
@@ -261,7 +261,7 @@ metal_carpentry.register_all_shapes({
 })
 
 metal_carpentry.register_all_shapes({
-	subname = "rusty_iron",
+	subname = "corrugated_iron",
 	tiles = {"metal_carpentry_corrugated_iron.png"},
 	recipeitem = "metal_carpentry:corrugated_iron_block",
 	groups = {cracky=1, level=2, corrugated=1},
@@ -334,19 +334,32 @@ minetest.register_craft({
 
 
 --
--- Définition des ABM
+-- ABM defs
 --
 
--- Pour faire rouiller l'acier
+-- Steel corrugation
 minetest.register_abm({
-	label = "Steel oxydation",                                                   -- Pas d'influence en jeu
-	nodenames = {"default:steel_block"},                                         -- Nodes concernés par la transformation
-	interval = 5,                                                               -- Durée de la transformation (en secondes)
-	chance = 1,                                                                  -- Probabilité (1/x)
-	catch_up = true,                                                             -- Pour corriger un bug…
-	neighbors = {"default:water_source", "default:water_flowing",
-		"group:corrugated"},                                     -- Nodes dont le voisinage provoque la transformation
-	action = function(pos, node, active_object_count, active_object_count_wider) -- Action (pas forcément un remplacement de node…)
+	label = "Steel corrugation",          -- Pas d'influence en jeu
+	nodenames = {"default:steelblock"}, -- Nodes concernés par la transformation
+	interval = 60,                       -- Durée de la transformation (en secondes)
+	chance = 2,                         -- Probabilité (1/x)
+	catch_up = true,                    -- Pour corriger un bug…
+	neighbors = {"group:water", "group:snowy", "group:corrugated", "default:ice"},   -- Nodes dont le voisinage provoque la transformation
+	action = function(pos, node, active_object_count, active_object_count_wider)         -- Action (pas forcément un remplacement de node…)
 		minetest.set_node(pos, {name="metal_carpentry:corrugated_iron_block"})
 	end })
+
+
+-- Bronze corrugation
+minetest.register_abm({
+	label = "Bronze corrugation",          -- Pas d'influence en jeu
+	nodenames = {"default:bronzeblock"}, -- Nodes concernés par la transformation
+	interval = 60,                       -- Durée de la transformation (en secondes)
+	chance = 2,                         -- Probabilité (1/x)
+	catch_up = true,                    -- Pour corriger un bug…
+	neighbors = {"group:water", "group:snowy", "group:corrugated", "default:ice"},   -- Nodes dont le voisinage provoque la transformation
+	action = function(pos, node, active_object_count, active_object_count_wider)         -- Action (pas forcément un remplacement de node…)
+		minetest.set_node(pos, {name="metal_carpentry:corrugated_bronze_block"})
+	end })
+
 
