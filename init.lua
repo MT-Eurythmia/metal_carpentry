@@ -183,18 +183,18 @@ end
 -- Nodes definitions
 --
 
-minetest.register_node('metal_carpentry:rusty_iron_block', {
+minetest.register_node('metal_carpentry:corrugated_iron_block', {
 	description = 'Rusty iron block',
-	tiles = {'metal_carpentry_rusty_iron.png'},
-	groups = {cracky=1, level=2},
+	tiles = {'metal_carpentry_corrugated_iron.png'},
+	groups = {cracky=1, level=2, corrugated=1},
 	is_ground_content = false,
 	sounds = default.node_sound_metal_defaults(),
 })
 
-minetest.register_node('metal_carpentry:old_bronze_block', {
+minetest.register_node('metal_carpentry:corrugated_bronze_block', {
 	description = 'Old bronze block',
-	tiles = {'metal_carpentry_old_bronze.png'},
-	groups = {cracky=1, level=2},
+	tiles = {'metal_carpentry_corrugated_bronze.png'},
+	groups = {cracky=1, level=2, corrugated=1},
 	is_ground_content = false,
 	sounds = default.node_sound_metal_defaults(),
 })
@@ -202,7 +202,7 @@ minetest.register_node('metal_carpentry:old_bronze_block', {
 minetest.register_node('metal_carpentry:engraved_steel_block', {
 	description = 'Engraved steel block',
 	tiles = {'metal_carpentry_engraved_steel.png'},
-	groups = {cracky=1, level=2},
+	groups = {cracky=1, level=2, corrugated=1},
 	is_ground_content = false,
 	sounds = default.node_sound_metal_defaults(),
 })
@@ -210,7 +210,7 @@ minetest.register_node('metal_carpentry:engraved_steel_block', {
 minetest.register_node('metal_carpentry:brushed_steel_block', {
 	description = 'Brushed steel block',
 	tiles = {'metal_carpentry_brushed_steel.png'},
-	groups = {cracky=1, level=2},
+	groups = {cracky=1, level=2, corrugated=1},
 	is_ground_content = false,
 	sounds = default.node_sound_metal_defaults(),
 })
@@ -225,9 +225,9 @@ minetest.register_node('metal_carpentry:brushed_steel_block', {
 -- groups, images, desc_stair, desc_slab, sounds)
 stairs.register_stair_and_slab(
 	"rusty_iron",
-	"metal_carpentry:rusty_iron_block",
-	{cracky = 1, level = 2},
-	{"metal_carpentry_rusty_iron.png"},
+	"metal_carpentry:corrugated_iron_block",
+	{cracky = 1, level = 2, corrugated=1},
+	{"metal_carpentry_corrugated_iron.png"},
 	"Rusty iron stair",
 	"Rusty iron slab",
 	default.node_sound_metal_defaults()
@@ -235,9 +235,9 @@ stairs.register_stair_and_slab(
 
 stairs.register_stair_and_slab(
 	"old_bronze",
-	"metal_carpentry:old_bronze_block",
-	{cracky = 1, level = 2},
-	{"metal_carpentry_old_bronze.png"},
+	"metal_carpentry:corrugated_bronze_block",
+	{cracky = 1, level = 2, corrugated=1},
+	{"metal_carpentry_corrugated_bronze.png"},
 	"Old bronze stair",
 	"Old bronze slab",
 	default.node_sound_metal_defaults()
@@ -251,9 +251,9 @@ stairs.register_stair_and_slab(
 
 metal_carpentry.register_all_shapes({
 	subname = "old_bronze",
-	tiles = {"metal_carpentry_old_bronze.png"},
-	recipeitem = "metal_carpentry:old_bronze_block",
-	groups = {cracky=1, level=2},
+	tiles = {"metal_carpentry_corrugated_bronze.png"},
+	recipeitem = "metal_carpentry:corrugated_bronze_block",
+	groups = {cracky=1, level=2, corrugated=1},
 	sounds = default.node_sound_metal_defaults(),
 	hdesc = "Old bronze H beam",
 	ldesc = "Old bronze L beam",
@@ -262,9 +262,9 @@ metal_carpentry.register_all_shapes({
 
 metal_carpentry.register_all_shapes({
 	subname = "rusty_iron",
-	tiles = {"metal_carpentry_rusty_iron.png"},
-	recipeitem = "metal_carpentry:rusty_iron_block",
-	groups = {cracky=1, level=2},
+	tiles = {"metal_carpentry_corrugated_iron.png"},
+	recipeitem = "metal_carpentry:corrugated_iron_block",
+	groups = {cracky=1, level=2, corrugated=1},
 	sounds = default.node_sound_metal_defaults(),
 	hdesc = "Rusty iron H beam",
 	ldesc = "Rusty iron L beam",
@@ -275,7 +275,7 @@ metal_carpentry.register_all_shapes({
 	subname = "engraved_steel",
 	tiles = {"metal_carpentry_engraved_steel.png"},
 	recipeitem = "metal_carpentry:engraved_steel_block",
-	groups = {cracky=1, level=2},
+	groups = {cracky=1, level=2, corrugated=1},
 	sounds = default.node_sound_metal_defaults(),
 	hdesc = "Engraved steel H beam",
 	ldesc = "Engraved steel L beam",
@@ -286,7 +286,7 @@ metal_carpentry.register_all_shapes({
 	subname = "brushed_steel",
 	tiles = {"metal_carpentry_brushed_steel.png"},
 	recipeitem = "metal_carpentry:brushed_steel_block",
-	groups = {cracky=1, level=2},
+	groups = {cracky=1, level=2, corrugated=1},
 	sounds = default.node_sound_metal_defaults(),
 	hdesc = "Brushed steel H beam",
 	ldesc = "Brushed steel L beam",
@@ -297,7 +297,7 @@ metal_carpentry.register_all_shapes({
 	subname = "steel",
 	tiles = {"default_steel_block.png"},
 	recipeitem = "default:steelblock",
-	groups = {cracky=1, level=2},
+	groups = {cracky=1, level=2, corrugated=1},
 	sounds = default.node_sound_metal_defaults(),
 	hdesc = "Steel H beam",
 	ldesc = "Steel L beam",
@@ -310,13 +310,13 @@ metal_carpentry.register_all_shapes({
 
 minetest.register_craft({
 	type = 'shapeless',
-	output = 'metal_carpentry:rusty_iron_block 1',
+	output = 'metal_carpentry:corrugated_iron_block 1',
 	recipe = {'default:dirt', 'default:steelblock'},
 })
 
 minetest.register_craft({
 	type='shapeless',
-	output='metal_carpentry:old_bronze_block 1',
+	output='metal_carpentry:corrugated_bronze_block 1',
 	recipe={'default:dirt', 'default:bronzeblock'},
 })
 
@@ -331,3 +331,22 @@ minetest.register_craft({
 	output='metal_carpentry:brushed_steel_block 1',
 	recipe={'default:cobble', 'default:steelblock'},
 })
+
+
+--
+-- Définition des ABM
+--
+
+-- Pour faire rouiller l'acier
+minetest.register_abm({
+	label = "Steel oxydation",                                                   -- Pas d'influence en jeu
+	nodenames = {"default:steel_block"},                                         -- Nodes concernés par la transformation
+	interval = 5,                                                               -- Durée de la transformation (en secondes)
+	chance = 1,                                                                  -- Probabilité (1/x)
+	catch_up = true,                                                             -- Pour corriger un bug…
+	neighbors = {"default:water_source", "default:water_flowing",
+		"group:corrugated"},                                     -- Nodes dont le voisinage provoque la transformation
+	action = function(pos, node, active_object_count, active_object_count_wider) -- Action (pas forcément un remplacement de node…)
+		minetest.set_node(pos, {name="metal_carpentry:corrugated_iron_block"})
+	end })
+
